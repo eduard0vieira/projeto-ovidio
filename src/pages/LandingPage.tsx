@@ -11,12 +11,12 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen">
-      {/* Hero Section */}
+
       <section className="relative overflow-hidden py-32 px-6">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-purple-50 -z-10" />
+
+        <div className="absolute inset-0 bg-linear-to-br from-indigo-50 via-white to-purple-50 -z-10" />
         
-        {/* Animated Background Elements */}
+
         <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob" />
         <div className="absolute top-40 right-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000" />
         <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000" />
@@ -31,7 +31,7 @@ export const LandingPage: React.FC = () => {
           >
             <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
               Organize suas{" "}
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 tarefas
               </span>
               <br />
@@ -45,10 +45,10 @@ export const LandingPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <Link
                 to="/register"
-                className="group relative px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 transform"
+                className="group relative px-8 py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 transform"
               >
                 <span className="relative z-10">Começar Agora</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-linear-to-r from-indigo-700 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
               <Link
                 to="/login"
@@ -61,8 +61,8 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 px-6 bg-white">
+
+      <section className="py-24 px-6 bg-white rounded-tl-3xl rounded-tr-3xl shadow-cyan-500/50">
         <div className="max-w-6xl mx-auto">
           <div
             className={`text-center mb-16 transition-all duration-1000 delay-200 ${
@@ -80,18 +80,18 @@ export const LandingPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Feature Card 1 */}
+        
             <div
-              className={`group relative bg-gradient-to-br from-white to-indigo-50 p-8 rounded-2xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+              className={`group relative bg-linear-to-br from-white to-indigo-50 p-8 rounded-2xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: "300ms" }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-br from-indigo-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
+                <div className="w-16 h-16 bg-linear-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
                   <CheckSquareIcon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">
@@ -104,18 +104,18 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Feature Card 2 */}
+            
             <div
-              className={`group relative bg-gradient-to-br from-white to-purple-50 p-8 rounded-2xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+              className={`group relative bg-linear-to-br from-white to-purple-50 p-8 rounded-2xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: "500ms" }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
+                <div className="w-16 h-16 bg-linear-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-8 h-8 text-white"
@@ -141,18 +141,18 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Feature Card 3 */}
+            
             <div
-              className={`group relative bg-gradient-to-br from-white to-pink-50 p-8 rounded-2xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+              className={`group relative bg-linear-to-br from-white to-pink-50 p-8 rounded-t-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: "700ms" }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-indigo-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-br from-pink-500/5 to-indigo-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
+                <div className="w-16 h-16 bg-linear-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-8 h-8 text-white"
@@ -181,16 +181,16 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-indigo-600 to-purple-600">
+      
+      <section className="py-20 px-6 bg-linear-to-r from-indigo-600 to-purple-600 rounded-bl-3xl rounded-br-3xl">
         <div className="max-w-4xl mx-auto text-center">
           <div
             className={`transition-all duration-1000 delay-500 ${
               isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
             }`}
-          >
+            >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Pronto para começar?
             </h2>
@@ -201,7 +201,7 @@ export const LandingPage: React.FC = () => {
             <Link
               to="/register"
               className="inline-block px-10 py-4 bg-white text-indigo-600 font-bold rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform"
-            >
+              >
               Criar Conta Grátis
             </Link>
           </div>
