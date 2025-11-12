@@ -13,6 +13,7 @@ import { TaskFormPage } from "./pages/TaskFormPage";
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  void currentUser;
 
   const [page, setPage] = useState<Page>("login");
 
