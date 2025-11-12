@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import type { FormEvent, FocusEvent } from "react";
-import type { NotificationState, ViaCepData } from "../types";
+import type { ViaCepData } from "../types";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import { InputField } from "../components/InputField";
 
-interface RegisterProps {
-  setNotification: (notification: NotificationState) => void;
-}
-
-export const RegisterPage: React.FC<RegisterProps> = ({
-  setNotification,
-}) => {
+export const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -75,16 +70,10 @@ export const RegisterPage: React.FC<RegisterProps> = ({
     e.preventDefault();
     if (validateForm()) {
       console.log("Register attempt:", { name, email, password });
-      setNotification({
-        type: "success",
-        message: "Cadastro realizado! Faça o login.",
-      });
+      toast.success("Cadastro realizado! Faça o login.");
       navigate("/login");
     } else {
-      setNotification({
-        type: "error",
-        message: "Por favor, corrija os erros no formulário.",
-      });
+      toast.error("Por favor, corrija os erros no formulário.");
     }
   };
 
@@ -96,7 +85,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Nome
+            Nome:
           </label>
           <InputField
             type="text"
@@ -111,7 +100,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            E-mail
+            E-mail:
           </label>
           <InputField
             type="email"
@@ -126,7 +115,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Senha
+            Senha:
           </label>
           <InputField
             type="password"
@@ -141,7 +130,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Confirmar Senha
+            Confirmar Senha:
           </label>
           <InputField
             type="password"
@@ -164,7 +153,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                CEP
+                CEP:
               </label>
               <InputField
                 type="text"
@@ -186,7 +175,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Rua
+                  Rua:
                 </label>
                 <InputField
                   type="text"
@@ -197,7 +186,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Bairro
+                  Bairro:
                 </label>
                 <InputField
                   type="text"
@@ -208,7 +197,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Cidade
+                  Cidade:
                 </label>
                 <InputField
                   type="text"
@@ -219,7 +208,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Estado (UF)
+                  Estado (UF):
                 </label>
                 <InputField
                   type="text"

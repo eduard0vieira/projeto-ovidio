@@ -19,16 +19,4 @@ export const MOCK_TASKS: Task[] = [
     description: "Montar os slides para a reunião de sexta-feira.",
     completed: false,
   },
-  {
-    id: "4",
-    title: "Teste",
-    description: "Testando para apresentação",
-    completed: false,
-  },
-  {
-    id: "5",
-    title: "Teste",
-    description: "Testando para apresentação",
-    completed: false,
-  },
 ];

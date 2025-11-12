@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import type { FormEvent } from "react";
-import type { NotificationState } from "../types";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import { InputField } from "../components/InputField";
 
 
 interface LoginProps {
   onLogin: (email: string) => void;
-  setNotification: (notification: NotificationState) => void;
 }
 
-export const LoginPage: React.FC<LoginProps> = ({
-  onLogin,
-  setNotification,
-}) => {
+export const LoginPage: React.FC<LoginProps> = ({ onLogin }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,10 +30,7 @@ export const LoginPage: React.FC<LoginProps> = ({
 
     console.log("Login attempt:", { email, password });
     onLogin(email);
-    setNotification({
-      type: "success",
-      message: "Login realizado com sucesso!",
-    });
+    toast.success("Login realizado com sucesso!");
     navigate("/list");
   };
 
@@ -53,7 +46,7 @@ export const LoginPage: React.FC<LoginProps> = ({
             htmlFor="email"
             className="block text-sm font-medium text-gray-700"
           >
-            E-mail
+            E-mail:
           </label>
           <InputField
             type="email"
@@ -69,7 +62,7 @@ export const LoginPage: React.FC<LoginProps> = ({
             htmlFor="password"
             className="block text-sm font-medium text-gray-700"
           >
-            Senha
+            Senha:
           </label>
           <InputField
             type="password"

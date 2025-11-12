@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import type { User, Task, NotificationState } from "./types";
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import type { User, Task } from "./types";
 import { MOCK_TASKS } from "./data/mockData";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { Notification } from "./components/Notification";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LandingPage } from "./pages/LandingPage";
 import { LoginPage } from "./pages/LoginPage";
@@ -17,9 +18,6 @@ const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   void currentUser;
   const [tasks, setTasks] = useState<Task[]>(MOCK_TASKS);
-  const [notification, setNotification] = useState<NotificationState | null>(
-    null,
-  );
 
   useEffect(() => {
     const savedSession = localStorage.getItem("crud-auth");
@@ -29,8 +27,6 @@ const App: React.FC = () => {
       setCurrentUser(user);
     }
   }, []);
-
-  const clearNotification = () => setNotification(null);
 
   const handleLogin = (email: string) => {
     const user: User = { id: "user-123", name: "Usuário Simulado", email };
@@ -43,7 +39,6 @@ const App: React.FC = () => {
     setIsAuthenticated(false);
     setCurrentUser(null);
     localStorage.removeItem("crud-auth");
-    setNotification({ type: "success", message: "Você saiu com segurança." });
   };
 
   const handleSaveTask = (taskData: Omit<Task, "id" | "completed">) => {
@@ -57,7 +52,7 @@ const App: React.FC = () => {
 
   const handleDeleteTask = (id: string) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
-    setNotification({ type: "error", message: "Tarefa excluída." });
+    toast.error("Tarefa excluída.");
   };
 
   const handleToggleComplete = (id: string) => {
@@ -70,11 +65,33 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-100 font-inter">
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          success: {
+            position: "top-right",
+            duration: 3000,
+            iconTheme: {
+              primary: "#10b981",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            position: "top-right",
+            duration: 3000,
+            iconTheme: {
+              primary: "#ef4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
       <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-
-      {notification && (
-        <Notification notification={notification} onClose={clearNotification} />
-      )}
 
       <main className="flex-grow container mx-auto p-6 pt-24">
         <Routes>
@@ -84,16 +101,11 @@ const App: React.FC = () => {
           />
           <Route
             path="/login"
-            element={
-              <LoginPage
-                onLogin={handleLogin}
-                setNotification={setNotification}
-              />
-            }
+            element={<LoginPage onLogin={handleLogin} />}
           />
           <Route
             path="/register"
-            element={<RegisterPage setNotification={setNotification} />}
+            element={<RegisterPage />}
           />
 
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
@@ -109,12 +121,7 @@ const App: React.FC = () => {
             />
             <Route
               path="/form"
-              element={
-                <TaskFormPage
-                  onSave={handleSaveTask}
-                  setNotification={setNotification}
-                />
-              }
+              element={<TaskFormPage onSave={handleSaveTask} />}
             />
           </Route>
 

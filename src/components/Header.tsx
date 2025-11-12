@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 interface HeaderProps {
   isAuthenticated: boolean;
@@ -14,6 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const handleLogout = () => {
     onLogout();
+    toast.success("Você saiu com segurança.");
     navigate("/login");
   };
 

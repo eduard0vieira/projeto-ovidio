@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import type { FormEvent } from "react";
-import type { NotificationState, Task } from "../types";
+import type { Task } from "../types";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import { InputField } from "../components/InputField";
 
 interface TaskFormProps {
   onSave: (taskData: Omit<Task, "id" | "completed">) => void;
-  setNotification: (notification: NotificationState) => void;
 }
 
-export const TaskFormPage: React.FC<TaskFormProps> = ({
-  onSave,
-  setNotification,
-}) => {
+export const TaskFormPage: React.FC<TaskFormProps> = ({ onSave }) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -35,7 +32,7 @@ export const TaskFormPage: React.FC<TaskFormProps> = ({
     setTitle("");
     setDescription("");
 
-    setNotification({ type: "success", message: "Tarefa salva com sucesso!" });
+    toast.success("Tarefa salva com sucesso!");
     navigate("/list");
   };
 
@@ -50,16 +47,15 @@ export const TaskFormPage: React.FC<TaskFormProps> = ({
         <div>
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Título
+            Título:
           </label>
           <InputField
             type="text"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="input-style"
             placeholder="Ex: Estudar React Hooks"
             autoComplete="off"
           />
@@ -68,16 +64,16 @@ export const TaskFormPage: React.FC<TaskFormProps> = ({
         <div>
           <label
             htmlFor="description"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Descrição
+            Descrição:
           </label>
           <textarea
             id="description"
             rows={4}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="input-style"
+            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed transition-all duration-150 resize-none"
             placeholder="Ex: Revisar useState, useEffect e props..."
           />
         </div>
