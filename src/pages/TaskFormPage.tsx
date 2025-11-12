@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import type { FormEvent } from "react";
-import type { Page, NotificationState, Task } from "../types";
+import type { NotificationState, Task } from "../types";
+import { useNavigate } from "react-router-dom";
+import { InputField } from "../components/InputField";
 
 interface TaskFormProps {
-  navigateTo: (page: Page) => void;
   onSave: (taskData: Omit<Task, "id" | "completed">) => void;
   setNotification: (notification: NotificationState) => void;
 }
 
 export const TaskFormPage: React.FC<TaskFormProps> = ({
-  navigateTo,
   onSave,
   setNotification,
 }) => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
@@ -35,7 +36,7 @@ export const TaskFormPage: React.FC<TaskFormProps> = ({
     setDescription("");
 
     setNotification({ type: "success", message: "Tarefa salva com sucesso!" });
-    navigateTo("list");
+    navigate("/list");
   };
 
   return (
@@ -53,7 +54,7 @@ export const TaskFormPage: React.FC<TaskFormProps> = ({
           >
             Título
           </label>
-          <input
+          <InputField
             type="text"
             id="title"
             value={title}
@@ -84,7 +85,7 @@ export const TaskFormPage: React.FC<TaskFormProps> = ({
         <div className="flex justify-end space-x-4 pt-4">
           <button
             type="button"
-            onClick={() => navigateTo("list")}
+            onClick={() => navigate("/list")}
             className="py-2 px-5 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-lg transition duration-200"
           >
             Cancelar

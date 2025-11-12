@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import type { FormEvent } from "react";
-import type { Page, NotificationState } from "../types";
+import type { NotificationState } from "../types";
+import { Link, useNavigate } from "react-router-dom";
+import { InputField } from "../components/InputField";
 
-/**
- * Tela de Login
- */
+
 interface LoginProps {
   onLogin: (email: string) => void;
-  navigateTo: (page: Page) => void;
   setNotification: (notification: NotificationState) => void;
 }
 
 export const LoginPage: React.FC<LoginProps> = ({
   onLogin,
-  navigateTo,
   setNotification,
 }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -39,6 +38,7 @@ export const LoginPage: React.FC<LoginProps> = ({
       type: "success",
       message: "Login realizado com sucesso!",
     });
+    navigate("/list");
   };
 
   return (
@@ -55,7 +55,7 @@ export const LoginPage: React.FC<LoginProps> = ({
           >
             E-mail
           </label>
-          <input
+          <InputField
             type="email"
             id="email"
             value={email}
@@ -71,7 +71,7 @@ export const LoginPage: React.FC<LoginProps> = ({
           >
             Senha
           </label>
-          <input
+          <InputField
             type="password"
             id="password"
             value={password}
@@ -89,13 +89,12 @@ export const LoginPage: React.FC<LoginProps> = ({
       </form>
       <p className="text-center text-gray-600 mt-6">
         Não tem uma conta?{" "}
-        <a
-          href="#/register"
-          onClick={() => navigateTo("register")}
+        <Link
+          to="/register"
           className="font-medium text-indigo-600 hover:text-indigo-700"
         >
           Registre-se
-        </a>
+        </Link>
       </p>
     </div>
   );

@@ -1,23 +1,24 @@
 import React from "react";
-import type { Task, Page } from "../types";
+import type { Task } from "../types";
+import { useNavigate } from "react-router-dom";
 import { TaskCard } from "../components/TaskCard";
 
 interface TaskListProps {
   tasks: Task[];
-  navigateTo: (page: Page) => void;
   onDelete: (id: string) => void;
   onToggleComplete: (id: string) => void;
 }
 
 export const TaskListPage: React.FC<TaskListProps> = ({
   tasks,
-  navigateTo,
   onDelete,
   onToggleComplete,
 }) => {
+  const navigate = useNavigate();
+
   const onEdit = (id: string) => {
     console.log(`Simulando edição do item: ${id}`);
-    navigateTo("form");
+    navigate("/form");
   };
 
   return (
@@ -25,7 +26,7 @@ export const TaskListPage: React.FC<TaskListProps> = ({
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold text-gray-800">Minhas Tarefas</h2>
         <button
-          onClick={() => navigateTo("form")}
+          onClick={() => navigate("/form")}
           className="flex items-center space-x-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-5 rounded-lg transition duration-200 shadow-lg"
         >
           <svg

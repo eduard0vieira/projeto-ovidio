@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import type { FormEvent, FocusEvent } from "react";
-import type { Page, NotificationState, ViaCepData } from "../types";
+import type { NotificationState, ViaCepData } from "../types";
+import { Link, useNavigate } from "react-router-dom";
+import { InputField } from "../components/InputField";
 
 interface RegisterProps {
-  onRegister: () => void;
-  navigateTo: (page: Page) => void;
   setNotification: (notification: NotificationState) => void;
 }
 
 export const RegisterPage: React.FC<RegisterProps> = ({
-  onRegister,
-  navigateTo,
   setNotification,
 }) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,11 +75,11 @@ export const RegisterPage: React.FC<RegisterProps> = ({
     e.preventDefault();
     if (validateForm()) {
       console.log("Register attempt:", { name, email, password });
-      onRegister();
       setNotification({
         type: "success",
         message: "Cadastro realizado! Faça o login.",
       });
+      navigate("/login");
     } else {
       setNotification({
         type: "error",
@@ -99,7 +98,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
           <label className="block text-sm font-medium text-gray-700">
             Nome
           </label>
-          <input
+          <InputField
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -114,7 +113,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
           <label className="block text-sm font-medium text-gray-700">
             E-mail
           </label>
-          <input
+          <InputField
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -129,7 +128,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
           <label className="block text-sm font-medium text-gray-700">
             Senha
           </label>
-          <input
+          <InputField
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -144,7 +143,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
           <label className="block text-sm font-medium text-gray-700">
             Confirmar Senha
           </label>
-          <input
+          <InputField
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -167,7 +166,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
               <label className="block text-sm font-medium text-gray-700">
                 CEP
               </label>
-              <input
+              <InputField
                 type="text"
                 value={cep}
                 onChange={(e) => setCep(e.target.value)}
@@ -189,7 +188,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
                 <label className="block text-sm font-medium text-gray-700">
                   Rua
                 </label>
-                <input
+                <InputField
                   type="text"
                   value={address.logradouro || ""}
                   readOnly
@@ -200,7 +199,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
                 <label className="block text-sm font-medium text-gray-700">
                   Bairro
                 </label>
-                <input
+                <InputField
                   type="text"
                   value={address.bairro || ""}
                   readOnly
@@ -211,7 +210,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
                 <label className="block text-sm font-medium text-gray-700">
                   Cidade
                 </label>
-                <input
+                <InputField
                   type="text"
                   value={address.localidade || ""}
                   readOnly
@@ -222,7 +221,7 @@ export const RegisterPage: React.FC<RegisterProps> = ({
                 <label className="block text-sm font-medium text-gray-700">
                   Estado (UF)
                 </label>
-                <input
+                <InputField
                   type="text"
                   value={address.uf || ""}
                   readOnly
@@ -242,13 +241,12 @@ export const RegisterPage: React.FC<RegisterProps> = ({
       </form>
       <p className="text-center text-gray-600 mt-6">
         Já tem uma conta?{" "}
-        <a
-          href="#/login"
-          onClick={() => navigateTo("login")}
+        <Link
+          to="/login"
           className="font-medium text-indigo-600 hover:text-indigo-700"
         >
           Faça login
-        </a>
+        </Link>
       </p>
     </div>
   );
