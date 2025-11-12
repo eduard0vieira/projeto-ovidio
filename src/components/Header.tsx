@@ -1,40 +1,45 @@
 import React from "react";
-import type { Page } from "../types";
+import { Link, useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   isAuthenticated: boolean;
   onLogout: () => void;
-  navigateTo: (page: Page) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   isAuthenticated,
   onLogout,
-  navigateTo,
 }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout();
+    navigate("/login");
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 shadow-md z-50">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-indigo-400">TaskApp</h1>
+        <Link to="/" className="text-2xl font-bold text-indigo-400">
+          TaskApp
+        </Link>
         <nav>
           {isAuthenticated ? (
             <>
-              <a
-                href="#/list"
-                onClick={() => navigateTo("list")}
+              <Link
+                to="/list"
                 className="mr-4 hover:text-indigo-300"
               >
                 Minhas Tarefas
-              </a>
-              <a
-                href="#/form"
-                onClick={() => navigateTo("form")}
+              </Link>
+              <Link
+                to="/form"
                 className="mr-4 hover:text-indigo-300"
               >
                 Nova Tarefa
-              </a>
+              </Link>
               <button
-                onClick={onLogout}
+                onClick={handleLogout}
                 className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
               >
                 Sair
@@ -42,20 +47,18 @@ export const Header: React.FC<HeaderProps> = ({
             </>
           ) : (
             <>
-              <a
-                href="#/login"
-                onClick={() => navigateTo("login")}
+              <Link
+                to="/login"
                 className="mr-4 hover:text-indigo-300"
               >
                 Login
-              </a>
-              <a
-                href="#/register"
-                onClick={() => navigateTo("register")}
+              </Link>
+              <Link
+                to="/register"
                 className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
               >
                 Registrar
-              </a>
+              </Link>
             </>
           )}
         </nav>
